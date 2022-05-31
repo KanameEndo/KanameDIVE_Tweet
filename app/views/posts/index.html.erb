@@ -1,4 +1,5 @@
 <h1>呟いた日々 一覧</h1>
+<p><%= notice %></p>
 
 <table>
   <tr>
@@ -9,8 +10,11 @@
   <tr>
     <td><%= post.content %></td>
     <td><%= link_to 'つぶやきを確認する', post_path(post.id) %></td>
-    <td><%= link_to 'つぶやきを編集する', edit_post_path(post.id) %></td>
+    <td><%= link_to 'つぶやきを編集する', edit_post_path(post.id), data: { confirm: '本当に編集していいですか？' } %></td>
+    <td><%= link_to 'つぶやきを削除する', post_path(post.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
   </tr>
+  
 <% end %>
 </table>
+
 <%= link_to 'これから呟く', new_post_path %>
