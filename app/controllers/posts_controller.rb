@@ -11,10 +11,15 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if @post.save
-      redirect_to posts_path, notice: "つぶやき完了"
-    else
+    if params[:back]
       render :new
+    else
+      if @post.save
+      redirect_to posts_path, notice: "つぶやき完了"
+      else
+      render :new
+      end
+    end
   end
 
   def show
@@ -41,10 +46,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
   end
 
-end
 
-
-private
+  private
 
   def post_params
     params.require(:post).permit(:content)
